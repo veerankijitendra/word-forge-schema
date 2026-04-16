@@ -1,11 +1,9 @@
-import { defineConfig } from 'tsdown';
+import { defineConfig } from "tsdown";
 
-const config = defineConfig({
-  entry: './src/index.ts',
-  outDir: './docs',
-  tsconfig: './tsconfig.json',
+export default defineConfig({
+  entry: ["src/index.ts"],
+  outDir: "dist",
+  format: ["esm", "cjs"],
   dts: true,
   clean: true,
 });
-
-export default config;
