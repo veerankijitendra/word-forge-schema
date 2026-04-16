@@ -10,6 +10,7 @@ export const CreateUserRequestSchema = z
     password: z.string().min(6), // plain password
     profilePhotoUrl: z.url().optional(),
     goal: z.enum(['student', 'exam', 'typing', 'professional']),
+    refreshToken: z.string().optional().default(''),
   })
   .strict();
 
