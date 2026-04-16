@@ -1,6 +1,6 @@
 {
   "name": "@word-forge/schemas",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "docs/index.cjs",
   "module": "docs/index.mjs",
