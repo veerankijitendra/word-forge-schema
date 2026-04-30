@@ -1,18 +1,20 @@
 // src/user.schema.ts
 import { z } from 'zod';
 
-const RefreshTokensSchema = z.object({
-  token: z.string().min(1, 'Tokenis required'),
-  device: z.string().optional(),
-  ip: z.string().optional(),
-  createdAt: z
-    .date()
-    .optional()
-    .default(() => new Date()),
-  expiredAt: z.date({
-    error: 'Expiry date is required',
+const RefreshTokensSchema = z.array(
+  z.object({
+    token: z.string().min(1, 'Tokenis required'),
+    device: z.string().optional(),
+    ip: z.string().optional(),
+    createdAt: z
+      .date()
+      .optional()
+      .default(() => new Date()),
+    expiredAt: z.date({
+      error: 'Expiry date is required',
+    }),
   }),
-});
+);
 
 export const CreateUserRequestSchema = z
   .object({
