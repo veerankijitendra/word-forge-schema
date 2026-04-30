@@ -22,7 +22,7 @@ export const CreateUserRequestSchema = z
     username: z.string().min(3).max(20),
     firstName: z.string().min(2),
     lastName: z.string().min(1),
-    password: z.string().min(6), // plain password
+    password: z.string().min(6),
     profilePhotoUrl: z.url().optional(),
     goal: z.enum(['student', 'exam', 'typing', 'professional']),
     refreshTokens: RefreshTokensSchema,
