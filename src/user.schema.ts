@@ -1,20 +1,18 @@
 // src/user.schema.ts
 import { z } from 'zod';
+import { PasswordSchema } from './common.schema';
 
-const RefreshTokensSchema = z.array(
-  z.object({
-    token: z.string().min(1, 'Tokenis required'),
-    device: z.string().optional(),
-    ip: z.string().optional(),
-    createdAt: z
-      .date()
-      .optional()
-      .default(() => new Date()),
-    expiredAt: z.date({
-      error: 'Expiry date is required',
+export const RefreshTokensSchema = z
+  .array(
+    z.object({
+      token: z.string().min(1, 'Token is required'),
+      device: z.string().optional(),
+      ip: z.string().optional(),
+      createdAt: z.coerce.date().default(() => new Date()),
+      expiresAt: z.coerce.date(),
     }),
-  }),
-);
+  )
+  .default([]);
 
 export const CreateUserRequestSchema = z
   .object({
@@ -22,10 +20,9 @@ export const CreateUserRequestSchema = z
     username: z.string().min(3).max(20),
     firstName: z.string().min(2),
     lastName: z.string().min(1),
-    password: z.string().min(6),
-    profilePhotoUrl: z.url().optional(),
+    password: PasswordSchema,
+    profilePhotoUrl: z.union([z.url(), z.literal('')]).optional(),
     goal: z.enum(['student', 'exam', 'typing', 'professional']),
-    refreshTokens: RefreshTokensSchema,
   })
   .strict();
 
