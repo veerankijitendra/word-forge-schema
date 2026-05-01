@@ -2,18 +2,6 @@
 import { z } from 'zod';
 import { PasswordSchema } from './common.schema';
 
-export const RefreshTokensSchema = z
-  .array(
-    z.object({
-      token: z.string().min(1, 'Token is required'),
-      device: z.string().optional(),
-      ip: z.string().optional(),
-      createdAt: z.coerce.date().default(() => new Date()),
-      expiresAt: z.coerce.date(),
-    }),
-  )
-  .default([]);
-
 export const CreateUserRequestSchema = z
   .object({
     email: z.email(),
